@@ -40,7 +40,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean updateProduct(ProductEntity productEntity) {
-        return false;
+    public Boolean updateProduct(ProductEntity updated) {
+        repository.updateProduct(updated);
+        return true;
     }
 }

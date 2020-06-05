@@ -54,9 +54,12 @@ public class ProductServiceTest {
     @DisplayName(("ProductService Test Delete Product successful"))
     void deleteProductSuccessful(){
         //Given
+        ProductEntity mockProductEntity = new ProductEntity("1","new product",100.3,1);
+        doReturn(Optional.of(mockProductEntity)).when(productRepository).findById("1");
         //when
+       boolean deleted =  underTest.deleteProduct("1");
         //then
-
+        Assertions.assertFalse(deleted ,"Product was found");
 
     }
 
@@ -83,7 +86,19 @@ public class ProductServiceTest {
         List<ProductEntity> list = underTest.findAll();
         //then
         Assertions.assertEquals(2,list.size(),"find all should return two products");
+    }
 
+    @Test
+    @DisplayName("ProductService Test update products successful")
+    void updateProduct(){
+        //Given
+        ProductEntity oldProduct =  new ProductEntity("1","product 1",100.0,1);
+        ProductEntity newProduct = new ProductEntity("1","product 1",90.0,2);
+        //When
+        boolean result = underTest.updateProduct(newProduct);
+        //Then
+        Assertions.assertTrue(result,"Product was not updated");
+        Assertions.assertNotEquals(oldProduct,newProduct);
     }
 
 

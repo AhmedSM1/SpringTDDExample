@@ -16,6 +16,6 @@ public interface ProductService {
 
     List<ProductEntity> findAll();
 
-    boolean updateProduct(ProductEntity productEntity);
+    Boolean updateProduct(ProductEntity productEntity);
 
 }
